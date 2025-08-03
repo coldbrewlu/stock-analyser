@@ -159,52 +159,60 @@ This project implements a rule-based stock analysis system focused on U.S. equit
   "estimated_convergence_days": 64,
   "analysis_timestamp": "2025-08-03T15:00:00"
 }
-
-## Installation 
-### Run locally
 ```
+
+## Installation
+
+### Run locally
+
+```bash
 pip install -r requirements.txt
 uvicorn stock_analysis_implementation:app --reload
 ```
 
-
 ### Run with Docker
+
 Create a `Dockerfile`:
-```
+
+```dockerfile
 FROM python:3.10-slim
 WORKDIR /app
 COPY . /app
 RUN pip install --upgrade pip && pip install -r requirements.txt
 CMD ["uvicorn", "stock_analysis_implementation:app", "--host", "0.0.0.0", "--port", "8000"]
 ```
-then build and run:
-```
+
+Then build and run:
+
+```bash
 docker build -t stock-analyzer .
 docker run -p 8000:8000 stock-analyzer
+```
 
-```
-## Framework:
-```
+## Framework
+
+```plaintext
 project/
-├── main.py               # FastAPI 启动入口
+├── main.py               # FastAPI entrypoint
 ├── api/
-│   └── routes.py         # API 路由逻辑
+│   └── routes.py         # API routing
 ├── engines/
-│   ├── valuation.py      # 估值模块
-│   ├── technical.py      # 技术分析模块
-│   ├── convergence.py    # 回归估算模块
-│   ├── moat.py           # 护城河分析模块
+│   ├── valuation.py      # Valuation module
+│   ├── technical.py      # Technical analysis module
+│   ├── convergence.py    # Convergence estimation module
+│   └── moat.py           # Moat rating module
 ├── data/
-│   └── fetcher.py        # 财报、价格数据抓取模块
+│   └── fetcher.py        # Financial data fetcher
 ├── models/
-│   └── schemas.py        # dataclass / pydantic 数据结构
+│   └── schemas.py        # Dataclasses / data models
 ├── utils/
-│   └── charts.py         # 图表绘制工具
+│   └── charts.py         # Chart rendering tools
 ├── screener/
-│   └── screener.py       # 股票筛选逻辑
-├── Dockerfile            # Docker 容器化部署脚本
-├── requirements.txt      # 依赖包声明
+│   └── screener.py       # Stock screening logic
+├── Dockerfile            # Docker build script
+├── requirements.txt      # Python dependencies
 ```
 
 ## License
+
 MIT License
